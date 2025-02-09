@@ -3,6 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 import "../styles.css";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { RESTAURANT_CARDS_API } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Body = () => {
  // console.log("Body Rendered");
@@ -13,17 +15,15 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(()=>{
-    console.log("UE called");
+    //console.log("UE called");
     fetchData();
   },[])
   const fetchData = async () =>{
-    const data = await fetch(
-      "https://proxy.cors.sh/https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch("https://thingproxy.freeboard.io/fetch/" + RESTAURANT_CARDS_API)
     const json = await data.json();
     const restaurantList =
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-      console.log(restaurantList);
+    //console.log(restaurantList);
       
     setListOfResturants(restaurantList)
     setListOfResturantsDuplicate(restaurantList)
@@ -71,7 +71,9 @@ const Body = () => {
       </div>
       <div className="rest-container">
         {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restInfo={restaurant} />
+          <Link class="card-links" key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+            <RestaurantCard restInfo={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
