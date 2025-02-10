@@ -19,7 +19,7 @@ const Body = () => {
     fetchData();
   },[])
   const fetchData = async () =>{
-    const data = await fetch("https://thingproxy.freeboard.io/fetch/" + RESTAURANT_CARDS_API)
+    const data = await fetch(RESTAURANT_CARDS_API)
     const json = await data.json();
     const restaurantList =
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
@@ -71,7 +71,7 @@ const Body = () => {
       </div>
       <div className="rest-container">
         {listOfRestaurants.map((restaurant) => (
-          <Link class="card-links" key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+          <Link className="card-links" key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
             <RestaurantCard restInfo={restaurant} />
           </Link>
         ))}

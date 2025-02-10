@@ -6,17 +6,15 @@ import { MENU_API } from "../utils/constants";
 const RestaurantMenu = () => {
     const [resMenu, setResMenu] = useState(null); 
 
-    const { resId } = useParams();
-
-    console.log(resId);
-    
-
+    const params = useParams();
+    const {resId} = params
+    //console.log(params);
     useEffect(() => {
         fetchMenu();
     }, []);
 
     const fetchMenu = async () => {
-        const data = await fetch("https://thingproxy.freeboard.io/fetch/" + MENU_API + resId);
+        const data = await fetch(MENU_API + resId);
         const json = await data.json();
         
         setResMenu(json.data); 

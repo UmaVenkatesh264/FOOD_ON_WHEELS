@@ -91,3 +91,9 @@
   text-decoration: none;
   color: #000;
 }
+
+.user-card{
+  padding: 10px;
+  border: 2px solid black;
+  margin: 10px;
+}
