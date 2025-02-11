@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_CARDS_API } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
  // console.log("Body Rendered");
@@ -27,6 +28,11 @@ const Body = () => {
       
     setListOfResturants(restaurantList)
     setListOfResturantsDuplicate(restaurantList)
+  }
+
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus === false){
+    return <h1>Looks like you're offline, please check your internet connection</h1>
   }
   
   return listOfRestaurants.length === 0 ? (
