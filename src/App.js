@@ -16,6 +16,7 @@ const App = () => {
   return (
     <div>
       <Header />
+      <hr/>
       <Outlet />
     </div>
   );

@@ -38,19 +38,19 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="filter">
-        <div className="search">
-          <input
-            type="text"
-            className="input"
-            value={searchText}
-            onChange={(event) => {
-              setSearchText(event.target.value);
-            }}
-          ></input>
+    <div>
+      <div className="flex items-center justify-center">
+        <div className="p-4">
+        <input
+          className="border-solid border-2 border-black p-1.5 rounded-lg"
+          type="text"
+          value={searchText}
+          onChange={(event) => {
+          setSearchText(event.target.value);
+          }}
+        />
           <button
-            className="searchbtn"
+            className="px-4 py-2 m-4 bg-blue-400 rounded-lg"
             onClick={() => {
               const searchedRestaurants = listOfRestaurantsDuplicate.filter((res) =>
                 res.info.name
@@ -63,8 +63,9 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="p-4">
         <button
-          className="toprated"
+          className="px-4 py-2 bg-green-400 rounded-lg"
           onClick={() => {
             const topRatedRestaurants = listOfRestaurants.filter(
               (rest) => rest.info.avgRating >= 4.5
@@ -74,8 +75,10 @@ const Body = () => {
         >
           TOP RATED RESTAURANTS
         </button>
+        </div>
       </div>
-      <div className="rest-container">
+
+      <div className="flex flex-wrap justify-start gap-6">
         {listOfRestaurants.map((restaurant) => (
           <Link className="card-links" key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
             <RestaurantCard restInfo={restaurant} />

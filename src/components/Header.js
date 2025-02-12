@@ -6,27 +6,24 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
   const [btnName, setBtnName] = useState ("Login");
-  // useEffect(()=>{
-  //   console.log("USE EFFECT");  
-  // },[btnName])
   const onlineStatus = useOnlineStatus();
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} alt="App Logo" />
+    <div className="flex justify-between">
+      <div>
+        <img className="w-56" src={LOGO_URL} alt="App Logo" />
       </div>
-      <div className="navbar">
-        <ul className="header-list">
-          <li>Online Status: {onlineStatus ? "🟢" : "🔴" }</li>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/grocery">Grocery</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li>Cart</li>
-        </ul>
-        <button className="login" onClick={()=>{
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4">
+          <li className="px-4">Online Status: {onlineStatus ? "🟢" : "🔴" }</li>
+          <li className="px-4"><Link to="/">Home</Link></li>
+          <li className="px-4"><Link to="/about">About</Link></li>
+          <li className="px-4"><Link to="/contact">Contact</Link></li>
+          <li className="px-4"><Link to="/grocery">Grocery</Link></li>
+          <li className="px-4">Cart</li>
+          <button className="px-4" onClick={()=>{
           btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
         }}>{btnName}</button>
+        </ul>
       </div>
     </div>
   );
