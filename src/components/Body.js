@@ -1,11 +1,12 @@
 import React from "react";
 import RestaurantCard from "./RestaurantCard";
 import "../styles.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_CARDS_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../utils/userContext";
 
 const Body = () => {
  // console.log("Body Rendered");
@@ -30,11 +31,13 @@ const Body = () => {
     setListOfResturantsDuplicate(restaurantList)
   }
 
+  const { loggedInUser, setUserName} = useContext(userContext);
+
   const onlineStatus = useOnlineStatus();
   if(onlineStatus === false){
     return <h1>Looks like you're offline, please check your internet connection</h1>
   }
-  
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -75,6 +78,14 @@ const Body = () => {
         >
           TOP RATED RESTAURANTS
         </button>
+        </div>
+        <div className="p-4">
+          <label>USER NAME : </label>
+          <input className="border-black border-2 p-2"
+          value = {loggedInUser}
+          onChange={(e)=>{
+            setUserName(e.target.value);
+          }}/>
         </div>
       </div>
 
